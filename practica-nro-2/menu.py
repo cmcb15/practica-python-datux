@@ -48,7 +48,7 @@ def agregar_producto():
     producto = input("Ingrese el nombre del producto: ")
     cantidad = int(input("Ingrese la cantidad de productos: "))
     precio = float(input("Ingrese el precio unitario del producto: "))
-    promocion = input("¿Tiene promoción el producto?: Ingrese True o False") == "True"
+    promocion = input("¿Tiene promoción el producto?: Escriba True o False: ") == "True"
     nueva_venta = {"fecha": fecha, "producto": producto, "cantidad": cantidad, "precio": precio, "promocion": promocion}
     ventas.append(nueva_venta)
     print("El producto fue añadido correctamente.")
@@ -100,6 +100,7 @@ while True:
             mostrar_productos()
         case "7":
             print("Saliendo del programa.")
+            print("\n")
             break
         case _:
             print("Opción inválida. Intente de nuevo.")

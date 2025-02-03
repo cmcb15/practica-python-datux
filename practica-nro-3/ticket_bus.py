@@ -74,6 +74,7 @@ class Admin:
     
     def menu(self):
         while True:
+            print("\nMenú del Administrador:")
             print("1. Agregar Bus")
             print("2. Agregar Ruta a Bus")
             print("3. Registrar Horario a Bus")
@@ -83,53 +84,65 @@ class Admin:
             print("7. Salir")
             opcion = input("Seleccione una opción: ")
             
-            if opcion == "1":
-                cod_bus = input("Ingrese el codigo del bus: ")
-                self.agregar_bus(cod_bus)
-            elif opcion == "2":
-                cod_bus = input("Ingrese el codigo del bus: ")
-                bus = self.buscar_bus(cod_bus)
-                if bus:
-                    ruta = input("Ingrese la ruta: ")
-                    bus.asignar_ruta(ruta)
-                else:
-                    print("El bus no se ha encontrado.")
-            elif opcion == "3":
-                cod_bus = input("Ingrese el codigo del bus: ")
-                bus = self.buscar_bus(cod_bus)
-                if bus:
-                    horario = input("Ingrese el horario en formato HH:MM (24 horas), por favor: ")
-                    bus.registrar_horario(horario)
-                else:
-                    print("El bus no se ha encontrado.")
-            elif opcion == "4":
-                nombre = input("Ingrese el nombre del conductor: ")
-                self.agregar_conductor(nombre)
-            elif opcion == "5":
-                nombre = input("Ingrese el nombre del conductor: ")
-                conductor = self.buscar_conductor(nombre)
-                if conductor:
-                    horario = input("Ingrese el horario en formato HH:MM (24 horas), por favor: ")
-                    conductor.asignar_horario(horario)
-                else:
-                    print("El conductor no se ha encontrado.")
-            elif opcion == "6":
-                cod_bus = input("Ingrese el codigo del bus: ")
-                bus = self.buscar_bus(cod_bus)
-                if bus:
+            match opcion:
+                case "1":
+                    cod_bus = input("Ingrese el codigo del bus: ")
+                    self.agregar_bus(cod_bus)
+                case "2":
+                    while True:
+                        cod_bus = input("Ingrese el codigo del bus: ")
+                        bus = self.buscar_bus(cod_bus)
+                        if bus:
+                            ruta = input("Ingrese la ruta: ")
+                            bus.asignar_ruta(ruta)
+                            break
+                        else:
+                            print("El bus no se ha encontrado. Intente de nuevo.")
+                case "3":
+                    while True:
+                        cod_bus = input("Ingrese el codigo del bus: ")
+                        bus = self.buscar_bus(cod_bus)
+                        if bus:
+                            horario = input("Ingrese el horario en formato HH:MM (24 horas), por favor: ")
+                            bus.registrar_horario(horario)
+                            break
+                        else:
+                            print("El bus no se ha encontrado. Intente de nuevo.")
+                case "4":
                     nombre = input("Ingrese el nombre del conductor: ")
-                    conductor = self.buscar_conductor(nombre)
-                    if conductor:
-                        bus.asignar_conductor(conductor)
-                    else:
-                        print("El conductor no se ha encontrado.")
-                else:
-                    print("El bus no se ha encontrado.")
-            elif opcion == "7":
-                print("Saliendo del programa...")
-                break
-            else:
-                print("Opción no válida, intente de nuevo.")
+                    self.agregar_conductor(nombre)
+                case "5":
+                    while True:
+                        nombre = input("Ingrese el nombre del conductor: ")
+                        conductor = self.buscar_conductor(nombre)
+                        if conductor:
+                            horario = input("Ingrese el horario en formato HH:MM (24 horas), por favor: ")
+                            conductor.asignar_horario(horario)
+                            break
+                        else:
+                            print("El conductor no se ha encontrado. Intente de nuevo.")
+                case "6":
+                    while True:
+                        cod_bus = input("Ingrese el codigo del bus: ")
+                        bus = self.buscar_bus(cod_bus)
+                        if bus:
+                            while True:
+                                nombre = input("Ingrese el nombre del conductor: ")
+                                conductor = self.buscar_conductor(nombre)
+                                if conductor:
+                                    bus.asignar_conductor(conductor)
+                                    break
+                                else:
+                                    print("El conductor no se ha encontrado. Intente de nuevo.")
+                            break
+                        else:
+                            print("El bus no se ha encontrado. Intente de nuevo.")
+                case "7":
+                    print("Saliendo del programa...")
+                    print("\n")
+                    break
+                case _:
+                    print("Opción no válida, intente de nuevo.")
 
 
 if __name__ == "__main__":
